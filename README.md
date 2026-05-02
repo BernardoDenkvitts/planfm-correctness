@@ -23,6 +23,12 @@ The downstream task is binary classification over complete candidate plans. A pl
 
 Each problem contributes one positive candidate from the recovered gold plan. Negative candidates are generated with plan corruptions: truncation, deletion, adjacent swap, action replacement, action insertion, and short segment repetition. The checked-in candidate set was labeled with VAL.
 
+## Ground-Truth Verification With VAL
+
+VAL is the ground-truth verifier for the plan-validity labels used by this downstream task. During candidate generation, each recovered gold plan and each corrupted candidate plan is written as a temporary plan file and checked against the corresponding PDDL domain and problem with VAL. The resulting `label_valid` field is 1 only when VAL reports that the plan is valid. The separate `label_executable` field records whether the plan executes successfully before the final goal check.
+
+The checked-in candidate JSONL files already contain these VAL-derived labels. Training and evaluation from the checked-in dataset read those labels and do not invoke VAL again. VAL is required when candidate plans are regenerated from raw state trajectories. The internal labeler is included only for local smoke tests when VAL is unavailable.
+
 ## Frozen Transition Features
 
 The source transition models are not fine-tuned for validity classification. They are used as fixed feature generators. For each step in a candidate plan, the code rolls out the symbolic state with pyperplan, embeds the current state, next state, and goal, and compares the observed transition with the frozen model prediction.
