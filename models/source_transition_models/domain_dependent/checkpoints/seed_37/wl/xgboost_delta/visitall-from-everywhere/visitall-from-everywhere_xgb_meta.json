@@ -1,0 +1,18 @@
+{
+  "run_name": "visitall-from-everywhere",
+  "domains": [
+    "visitall-from-everywhere"
+  ],
+  "input_dim": 276,
+  "output_dim": 138,
+  "delta": true,
+  "encoding": "wl",
+  "encoding_alias": "graphs",
+  "n_estimators": 1000,
+  "max_depth": 8,
+  "learning_rate": 0.1,
+  "early_stopping": 10,
+  "seed": 37,
+  "device": "cuda",
+  "best_iteration": 22
+}

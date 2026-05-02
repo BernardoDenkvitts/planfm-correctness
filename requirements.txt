@@ -1,0 +1,9 @@
+numpy>=2.2.6
+pddl>=0.4.1
+pyperplan>=2.1
+scikit-learn>=1.7.2
+torch>=2.0
+tqdm>=4.67.1
+wlplan @ git+https://github.com/g-nitin/wlplan.git@f5b4ce635e3009e69ca26950cc6e4a649ab3a5b5
+xgboost>=3.1.2
+pytest>=8.0

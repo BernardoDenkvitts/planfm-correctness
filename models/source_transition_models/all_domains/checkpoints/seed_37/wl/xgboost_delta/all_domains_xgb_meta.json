@@ -1,0 +1,21 @@
+{
+  "run_name": "all_domains",
+  "domains": [
+    "blocks",
+    "gripper",
+    "logistics",
+    "visitall-from-everywhere"
+  ],
+  "input_dim": 2328,
+  "output_dim": 1164,
+  "delta": true,
+  "encoding": "wl",
+  "encoding_alias": "wl",
+  "n_estimators": 1000,
+  "max_depth": 8,
+  "learning_rate": 0.1,
+  "early_stopping": 10,
+  "seed": 37,
+  "device": "cuda",
+  "best_iteration": 14
+}

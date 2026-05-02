@@ -1,0 +1,47 @@
+{
+  "artifact_type": "multi_domain_union",
+  "base_tokenizer_name": "wl",
+  "tokenizer_kwargs": {
+    "iterations": 2,
+    "hash_dim": 128,
+    "seed": 42,
+    "max_path_length": 5,
+    "vocab_size": 1000,
+    "num_iterations": 100,
+    "random_dim": 128,
+    "normalize": true
+  },
+  "embedding_dim": 1164,
+  "domain_order": [
+    "blocks",
+    "gripper",
+    "logistics",
+    "visitall-from-everywhere"
+  ],
+  "domain_dimensions": {
+    "blocks": 172,
+    "gripper": 302,
+    "logistics": 552,
+    "visitall-from-everywhere": 138
+  },
+  "domain_offsets": {
+    "blocks": 0,
+    "gripper": 172,
+    "logistics": 474,
+    "visitall-from-everywhere": 1026
+  },
+  "artifacts": {
+    "blocks": "all_domains_wl_artifacts\\blocks.json",
+    "gripper": "all_domains_wl_artifacts\\gripper.json",
+    "logistics": "all_domains_wl_artifacts\\logistics.json",
+    "visitall-from-everywhere": "all_domains_wl_artifacts\\visitall-from-everywhere.json"
+  },
+  "tokenizer_name": "wl",
+  "fit_strategy": "union",
+  "domains": [
+    "blocks",
+    "gripper",
+    "logistics",
+    "visitall-from-everywhere"
+  ]
+}

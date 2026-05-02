@@ -1,0 +1,20 @@
+{
+  "run_name": "all_domains",
+  "domains": [
+    "blocks",
+    "gripper",
+    "logistics",
+    "visitall-from-everywhere"
+  ],
+  "model": "lstm",
+  "mode": "delta",
+  "encoding": "wl",
+  "input_dim": 1164,
+  "hidden_dim": 256,
+  "learning_rate": 0.01,
+  "epochs": 500,
+  "batch_size": 32,
+  "seed": 13,
+  "no_projection": false,
+  "amp": true
+}

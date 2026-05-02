@@ -1,0 +1,18 @@
+{
+  "run_name": "gripper",
+  "domains": [
+    "gripper"
+  ],
+  "input_dim": 604,
+  "output_dim": 302,
+  "delta": true,
+  "encoding": "wl",
+  "encoding_alias": "graphs",
+  "n_estimators": 1000,
+  "max_depth": 8,
+  "learning_rate": 0.1,
+  "early_stopping": 10,
+  "seed": 23,
+  "device": "cuda",
+  "best_iteration": 4
+}

@@ -1,0 +1,18 @@
+{
+  "run_name": "blocks",
+  "domains": [
+    "blocks"
+  ],
+  "input_dim": 344,
+  "output_dim": 172,
+  "delta": true,
+  "encoding": "wl",
+  "encoding_alias": "graphs",
+  "n_estimators": 1000,
+  "max_depth": 8,
+  "learning_rate": 0.1,
+  "early_stopping": 10,
+  "seed": 13,
+  "device": "cuda",
+  "best_iteration": 15
+}

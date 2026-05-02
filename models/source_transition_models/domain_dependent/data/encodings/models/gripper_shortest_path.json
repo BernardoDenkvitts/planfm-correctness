@@ -1,0 +1,33 @@
+{
+  "feature_keys": [
+    "_sp_len:1",
+    "_sp_len:2",
+    "goal_arity:2",
+    "goal_missing:at",
+    "goal_pred:at",
+    "goal_sp_len:1",
+    "goal_sp_len:2",
+    "goal_sp_len:3",
+    "goal_sp_len:4",
+    "goal_sp_len:5",
+    "n_goal_atoms",
+    "n_objects",
+    "n_state_atoms",
+    "sp_len:1",
+    "sp_len:2",
+    "sp_len:3",
+    "sp_len:4",
+    "sp_len:5",
+    "state_arity:1",
+    "state_arity:2",
+    "state_goal_overlap:at",
+    "state_pred:at",
+    "state_pred:at-robby",
+    "state_pred:ball",
+    "state_pred:carry",
+    "state_pred:free",
+    "state_pred:gripper",
+    "state_pred:room"
+  ],
+  "max_path_length": 5
+}

@@ -1,0 +1,330 @@
+﻿{
+  "run_root": "<original-workspace>\\models\\source_transition_models",
+  "source_data_dir": "<original-workspace>\\data",
+  "output_dir": "<original-workspace>\\data\\validity_dataset",
+  "domains": [
+    "blocks",
+    "gripper",
+    "logistics",
+    "visitall-from-everywhere"
+  ],
+  "splits": [
+    "train",
+    "validation",
+    "test-interpolation",
+    "test-extrapolation"
+  ],
+  "seeds": [
+    13,
+    23,
+    37
+  ],
+  "source_families": [
+    "ad_lstm_wl_delta",
+    "ad_xgb_wl_delta",
+    "dd_lstm_shortest_path_delta",
+    "dd_xgb_wl_delta"
+  ],
+  "negative_ratio": 4,
+  "candidate_seed": 2026,
+  "val_path": "<original-workspace>\\VAL\\build\\bin\\Validate.exe",
+  "labeler": "val",
+  "summaries": {
+    "candidates": {
+      "train": {
+        "total": 1156,
+        "valid": 231,
+        "invalid": 925,
+        "executable": 463,
+        "non_executable": 693
+      },
+      "validation": {
+        "total": 165,
+        "valid": 33,
+        "invalid": 132,
+        "executable": 68,
+        "non_executable": 97
+      },
+      "test-interpolation": {
+        "total": 260,
+        "valid": 52,
+        "invalid": 208,
+        "executable": 98,
+        "non_executable": 162
+      },
+      "test-extrapolation": {
+        "total": 1365,
+        "valid": 273,
+        "invalid": 1092,
+        "executable": 544,
+        "non_executable": 821
+      }
+    },
+    "features": {
+      "ad_lstm_wl_delta/seed_13": {
+        "train": {
+          "path": "<original-workspace>\\data\\validity_dataset\\features\\ad_lstm_wl_delta\\seed_13\\train.npz",
+          "num_rows": 1156,
+          "num_features": 55
+        },
+        "validation": {
+          "path": "<original-workspace>\\data\\validity_dataset\\features\\ad_lstm_wl_delta\\seed_13\\validation.npz",
+          "num_rows": 165,
+          "num_features": 55
+        },
+        "test-interpolation": {
+          "path": "<original-workspace>\\data\\validity_dataset\\features\\ad_lstm_wl_delta\\seed_13\\test-interpolation.npz",
+          "num_rows": 260,
+          "num_features": 55
+        },
+        "test-extrapolation": {
+          "path": "<original-workspace>\\data\\validity_dataset\\features\\ad_lstm_wl_delta\\seed_13\\test-extrapolation.npz",
+          "num_rows": 1365,
+          "num_features": 55
+        }
+      },
+      "ad_lstm_wl_delta/seed_23": {
+        "train": {
+          "path": "<original-workspace>\\data\\validity_dataset\\features\\ad_lstm_wl_delta\\seed_23\\train.npz",
+          "num_rows": 1156,
+          "num_features": 55
+        },
+        "validation": {
+          "path": "<original-workspace>\\data\\validity_dataset\\features\\ad_lstm_wl_delta\\seed_23\\validation.npz",
+          "num_rows": 165,
+          "num_features": 55
+        },
+        "test-interpolation": {
+          "path": "<original-workspace>\\data\\validity_dataset\\features\\ad_lstm_wl_delta\\seed_23\\test-interpolation.npz",
+          "num_rows": 260,
+          "num_features": 55
+        },
+        "test-extrapolation": {
+          "path": "<original-workspace>\\data\\validity_dataset\\features\\ad_lstm_wl_delta\\seed_23\\test-extrapolation.npz",
+          "num_rows": 1365,
+          "num_features": 55
+        }
+      },
+      "ad_lstm_wl_delta/seed_37": {
+        "train": {
+          "path": "<original-workspace>\\data\\validity_dataset\\features\\ad_lstm_wl_delta\\seed_37\\train.npz",
+          "num_rows": 1156,
+          "num_features": 55
+        },
+        "validation": {
+          "path": "<original-workspace>\\data\\validity_dataset\\features\\ad_lstm_wl_delta\\seed_37\\validation.npz",
+          "num_rows": 165,
+          "num_features": 55
+        },
+        "test-interpolation": {
+          "path": "<original-workspace>\\data\\validity_dataset\\features\\ad_lstm_wl_delta\\seed_37\\test-interpolation.npz",
+          "num_rows": 260,
+          "num_features": 55
+        },
+        "test-extrapolation": {
+          "path": "<original-workspace>\\data\\validity_dataset\\features\\ad_lstm_wl_delta\\seed_37\\test-extrapolation.npz",
+          "num_rows": 1365,
+          "num_features": 55
+        }
+      },
+      "ad_xgb_wl_delta/seed_13": {
+        "train": {
+          "path": "<original-workspace>\\data\\validity_dataset\\features\\ad_xgb_wl_delta\\seed_13\\train.npz",
+          "num_rows": 1156,
+          "num_features": 55
+        },
+        "validation": {
+          "path": "<original-workspace>\\data\\validity_dataset\\features\\ad_xgb_wl_delta\\seed_13\\validation.npz",
+          "num_rows": 165,
+          "num_features": 55
+        },
+        "test-interpolation": {
+          "path": "<original-workspace>\\data\\validity_dataset\\features\\ad_xgb_wl_delta\\seed_13\\test-interpolation.npz",
+          "num_rows": 260,
+          "num_features": 55
+        },
+        "test-extrapolation": {
+          "path": "<original-workspace>\\data\\validity_dataset\\features\\ad_xgb_wl_delta\\seed_13\\test-extrapolation.npz",
+          "num_rows": 1365,
+          "num_features": 55
+        }
+      },
+      "ad_xgb_wl_delta/seed_23": {
+        "train": {
+          "path": "<original-workspace>\\data\\validity_dataset\\features\\ad_xgb_wl_delta\\seed_23\\train.npz",
+          "num_rows": 1156,
+          "num_features": 55
+        },
+        "validation": {
+          "path": "<original-workspace>\\data\\validity_dataset\\features\\ad_xgb_wl_delta\\seed_23\\validation.npz",
+          "num_rows": 165,
+          "num_features": 55
+        },
+        "test-interpolation": {
+          "path": "<original-workspace>\\data\\validity_dataset\\features\\ad_xgb_wl_delta\\seed_23\\test-interpolation.npz",
+          "num_rows": 260,
+          "num_features": 55
+        },
+        "test-extrapolation": {
+          "path": "<original-workspace>\\data\\validity_dataset\\features\\ad_xgb_wl_delta\\seed_23\\test-extrapolation.npz",
+          "num_rows": 1365,
+          "num_features": 55
+        }
+      },
+      "ad_xgb_wl_delta/seed_37": {
+        "train": {
+          "path": "<original-workspace>\\data\\validity_dataset\\features\\ad_xgb_wl_delta\\seed_37\\train.npz",
+          "num_rows": 1156,
+          "num_features": 55
+        },
+        "validation": {
+          "path": "<original-workspace>\\data\\validity_dataset\\features\\ad_xgb_wl_delta\\seed_37\\validation.npz",
+          "num_rows": 165,
+          "num_features": 55
+        },
+        "test-interpolation": {
+          "path": "<original-workspace>\\data\\validity_dataset\\features\\ad_xgb_wl_delta\\seed_37\\test-interpolation.npz",
+          "num_rows": 260,
+          "num_features": 55
+        },
+        "test-extrapolation": {
+          "path": "<original-workspace>\\data\\validity_dataset\\features\\ad_xgb_wl_delta\\seed_37\\test-extrapolation.npz",
+          "num_rows": 1365,
+          "num_features": 55
+        }
+      },
+      "dd_lstm_shortest_path_delta/seed_13": {
+        "train": {
+          "path": "<original-workspace>\\data\\validity_dataset\\features\\dd_lstm_shortest_path_delta\\seed_13\\train.npz",
+          "num_rows": 1156,
+          "num_features": 55
+        },
+        "validation": {
+          "path": "<original-workspace>\\data\\validity_dataset\\features\\dd_lstm_shortest_path_delta\\seed_13\\validation.npz",
+          "num_rows": 165,
+          "num_features": 55
+        },
+        "test-interpolation": {
+          "path": "<original-workspace>\\data\\validity_dataset\\features\\dd_lstm_shortest_path_delta\\seed_13\\test-interpolation.npz",
+          "num_rows": 260,
+          "num_features": 55
+        },
+        "test-extrapolation": {
+          "path": "<original-workspace>\\data\\validity_dataset\\features\\dd_lstm_shortest_path_delta\\seed_13\\test-extrapolation.npz",
+          "num_rows": 1365,
+          "num_features": 55
+        }
+      },
+      "dd_lstm_shortest_path_delta/seed_23": {
+        "train": {
+          "path": "<original-workspace>\\data\\validity_dataset\\features\\dd_lstm_shortest_path_delta\\seed_23\\train.npz",
+          "num_rows": 1156,
+          "num_features": 55
+        },
+        "validation": {
+          "path": "<original-workspace>\\data\\validity_dataset\\features\\dd_lstm_shortest_path_delta\\seed_23\\validation.npz",
+          "num_rows": 165,
+          "num_features": 55
+        },
+        "test-interpolation": {
+          "path": "<original-workspace>\\data\\validity_dataset\\features\\dd_lstm_shortest_path_delta\\seed_23\\test-interpolation.npz",
+          "num_rows": 260,
+          "num_features": 55
+        },
+        "test-extrapolation": {
+          "path": "<original-workspace>\\data\\validity_dataset\\features\\dd_lstm_shortest_path_delta\\seed_23\\test-extrapolation.npz",
+          "num_rows": 1365,
+          "num_features": 55
+        }
+      },
+      "dd_lstm_shortest_path_delta/seed_37": {
+        "train": {
+          "path": "<original-workspace>\\data\\validity_dataset\\features\\dd_lstm_shortest_path_delta\\seed_37\\train.npz",
+          "num_rows": 1156,
+          "num_features": 55
+        },
+        "validation": {
+          "path": "<original-workspace>\\data\\validity_dataset\\features\\dd_lstm_shortest_path_delta\\seed_37\\validation.npz",
+          "num_rows": 165,
+          "num_features": 55
+        },
+        "test-interpolation": {
+          "path": "<original-workspace>\\data\\validity_dataset\\features\\dd_lstm_shortest_path_delta\\seed_37\\test-interpolation.npz",
+          "num_rows": 260,
+          "num_features": 55
+        },
+        "test-extrapolation": {
+          "path": "<original-workspace>\\data\\validity_dataset\\features\\dd_lstm_shortest_path_delta\\seed_37\\test-extrapolation.npz",
+          "num_rows": 1365,
+          "num_features": 55
+        }
+      },
+      "dd_xgb_wl_delta/seed_13": {
+        "train": {
+          "path": "<original-workspace>\\data\\validity_dataset\\features\\dd_xgb_wl_delta\\seed_13\\train.npz",
+          "num_rows": 1156,
+          "num_features": 55
+        },
+        "validation": {
+          "path": "<original-workspace>\\data\\validity_dataset\\features\\dd_xgb_wl_delta\\seed_13\\validation.npz",
+          "num_rows": 165,
+          "num_features": 55
+        },
+        "test-interpolation": {
+          "path": "<original-workspace>\\data\\validity_dataset\\features\\dd_xgb_wl_delta\\seed_13\\test-interpolation.npz",
+          "num_rows": 260,
+          "num_features": 55
+        },
+        "test-extrapolation": {
+          "path": "<original-workspace>\\data\\validity_dataset\\features\\dd_xgb_wl_delta\\seed_13\\test-extrapolation.npz",
+          "num_rows": 1365,
+          "num_features": 55
+        }
+      },
+      "dd_xgb_wl_delta/seed_23": {
+        "train": {
+          "path": "<original-workspace>\\data\\validity_dataset\\features\\dd_xgb_wl_delta\\seed_23\\train.npz",
+          "num_rows": 1156,
+          "num_features": 55
+        },
+        "validation": {
+          "path": "<original-workspace>\\data\\validity_dataset\\features\\dd_xgb_wl_delta\\seed_23\\validation.npz",
+          "num_rows": 165,
+          "num_features": 55
+        },
+        "test-interpolation": {
+          "path": "<original-workspace>\\data\\validity_dataset\\features\\dd_xgb_wl_delta\\seed_23\\test-interpolation.npz",
+          "num_rows": 260,
+          "num_features": 55
+        },
+        "test-extrapolation": {
+          "path": "<original-workspace>\\data\\validity_dataset\\features\\dd_xgb_wl_delta\\seed_23\\test-extrapolation.npz",
+          "num_rows": 1365,
+          "num_features": 55
+        }
+      },
+      "dd_xgb_wl_delta/seed_37": {
+        "train": {
+          "path": "<original-workspace>\\data\\validity_dataset\\features\\dd_xgb_wl_delta\\seed_37\\train.npz",
+          "num_rows": 1156,
+          "num_features": 55
+        },
+        "validation": {
+          "path": "<original-workspace>\\data\\validity_dataset\\features\\dd_xgb_wl_delta\\seed_37\\validation.npz",
+          "num_rows": 165,
+          "num_features": 55
+        },
+        "test-interpolation": {
+          "path": "<original-workspace>\\data\\validity_dataset\\features\\dd_xgb_wl_delta\\seed_37\\test-interpolation.npz",
+          "num_rows": 260,
+          "num_features": 55
+        },
+        "test-extrapolation": {
+          "path": "<original-workspace>\\data\\validity_dataset\\features\\dd_xgb_wl_delta\\seed_37\\test-extrapolation.npz",
+          "num_rows": 1365,
+          "num_features": 55
+        }
+      }
+    }
+  }
+}

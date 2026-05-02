@@ -1,0 +1,17 @@
+{
+  "run_name": "logistics",
+  "domains": [
+    "logistics"
+  ],
+  "model": "lstm",
+  "mode": "delta",
+  "encoding": "shortest_path",
+  "input_dim": 32,
+  "hidden_dim": 256,
+  "learning_rate": 0.01,
+  "epochs": 500,
+  "batch_size": 32,
+  "seed": 37,
+  "no_projection": false,
+  "amp": true
+}
