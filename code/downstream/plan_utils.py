@@ -301,6 +301,34 @@ def make_candidate_id(
     return f"{domain}::{split}::{problem}::{variant_index:03d}::{corruption_type}"
 
 
+def compute_correctness_score(context: ProblemContext, plan: list[str], lam: float = 0.5) -> float:
+    """
+    Compute a continuous correctness score for a candidate plan.
+    1.0 means fully correct, and 0.0 means completely broken.
+    The idea is: how far the plan got before failing, and how many goals it achieved.
+
+    """
+    current = set(context.task.initial_state)
+    effective_steps = 0
+    for action in plan:
+        op = context.operator_by_name.get(canonical_action(action))
+        if op is None or not op.applicable(current):
+            break
+        current = set(op.apply(current))
+        effective_steps += 1
+
+    execution_ratio = effective_steps / max(1, len(plan))
+
+    total_goals = len(context.task.goals)
+    if total_goals > 0:
+        satisfied_goals = sum(1 for g in context.task.goals if g in current)
+        goal_satisfaction = satisfied_goals / total_goals
+    else:
+        goal_satisfaction = 1.0
+
+    return float(lam * execution_ratio + (1.0 - lam) * goal_satisfaction)
+
+
 def generate_labeled_candidates_for_problem(
     *,
     context: ProblemContext,
@@ -317,6 +345,7 @@ def generate_labeled_candidates_for_problem(
 
     label = validator or _make_val_validator(context, val_path)
     is_valid, is_executable = label(gold_plan)
+    gold_correctness_score = compute_correctness_score(context, gold_plan)
     candidates.append(
         {
             "candidate_id": make_candidate_id(
@@ -334,6 +363,7 @@ def generate_labeled_candidates_for_problem(
             "plan_len": len(gold_plan),
             "gold_plan_len": len(gold_plan),
             "label_valid": int(is_valid),
+            "correctness_score": gold_correctness_score,
             "label_executable": int(is_executable),
         }
     )
@@ -357,6 +387,7 @@ def generate_labeled_candidates_for_problem(
         if is_valid:
             continue
 
+        cand_correctness_score = compute_correctness_score(context, candidate_plan)
         candidates.append(
             {
                 "candidate_id": make_candidate_id(
@@ -374,6 +405,7 @@ def generate_labeled_candidates_for_problem(
                 "plan_len": len(candidate_plan),
                 "gold_plan_len": len(gold_plan),
                 "label_valid": 0,
+                "correctness_score": cand_correctness_score,
                 "label_executable": int(is_executable),
             }
         )
@@ -401,6 +433,9 @@ def discover_val_path(repo_root: str | Path, user_val_path: str | None = None) -
     """Resolve the VAL binary used for plan labels."""
     if user_val_path:
         return user_val_path
+    
+    import shutil
+    
     root = Path(repo_root)
     candidates = [
         root / "VAL" / "build" / "bin" / "Validate.exe",
@@ -412,6 +447,11 @@ def discover_val_path(repo_root: str | Path, user_val_path: str | None = None) -
     for candidate in candidates:
         if candidate.exists() and os.access(candidate, os.X_OK):
             return str(candidate)
+            
+    system_val = shutil.which("Validate")
+    if system_val:
+        return system_val
+        
     return None
 
 

@@ -1,4 +1,4 @@
-"""Registry for frozen source models used by downstream validity heads."""
+"""Registry for frozen source models used by downstream correctness heads."""
 
 from __future__ import annotations
 

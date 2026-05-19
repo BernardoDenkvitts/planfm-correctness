@@ -1,0 +1,40 @@
+description: "Removed high correlated features >= .95"
+experiment: exp_005_removed_high_correlated_features 
+
+family: dd_lstm_shortest_path_delta
+seeds: [13, 23, 37]
+
+hidden_dims: [128, 64]
+dropout: 0.3
+activation: ReLU 
+
+lr: 0.001
+weight_decay: 0.0001
+batch_size: 64
+epochs: 150
+patience: 20
+
+features_to_drop: [
+    "pred_norm_final",
+    "pred_norm_max",
+    "pred_norm_min",
+    "pred_goal_l2_std",
+    "pred_goal_l2_final",
+    "pred_goal_l2_max",
+    "pred_goal_l2_mean",
+    "pred_goal_l2_min",
+    "final_goal_l2",
+    "initial_goal_l2",
+    "current_goal_l2_max",
+    "pred_norm_std",
+    "residual_l1_mean_min",
+    "residual_l1_mean_mean",
+    "residual_l1_mean_final",
+    "cosine_distance_max",
+]
+
+features_added: []   
+
+device: cuda
+verbose: false
+

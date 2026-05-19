@@ -1,0 +1,28 @@
+# MLP configuration - passed to train_correctness.py
+
+# --- Experiment metadata ---
+description: "GELU activation + Removed features related to raw plan size"
+experiment: exp_006_gelu_with_no_raw_plan_size_features   # used as the folder name under the family directory
+
+family: ad_lstm_wl_delta
+seeds: [13, 23, 37]      # runs all seeds
+
+# --- Model architecture ---
+hidden_dims: [128, 64, 32]
+dropout: 0.2
+activation: GELU         # ReLU | GELU | SiLU
+
+# --- Training ---
+lr: 0.001
+weight_decay: 0.0001
+batch_size: 64
+epochs: 150
+patience: 20
+
+# --- Feature selection (leave empty to use all 55 features) ---
+features_to_drop: ["plan_len", "log_plan_len", "plan_to_budget_ratio"]     # drop features whose name contains these substrings
+features_to_keep: []     # if non-empty, use ONLY these exact feature names
+
+# --- Runtime ---
+device: cuda             # auto | cpu | cuda | mps
+verbose: false

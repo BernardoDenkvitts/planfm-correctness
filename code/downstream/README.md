@@ -1,20 +1,120 @@
 # Downstream Code
 
-This folder contains the core downstream validity implementation.
+This folder contains the core pipeline for the **plan correctness regression** task.
+The goal is to predict how correct a plan is on a continuous scale from 0 (completely wrong)
+to 1 (fully correct), using features extracted from frozen transition models.
+
+---
 
 ## Files
 
-- `config.py`: central paths, domains, splits, and seeds for this GitHub snapshot.
-- `families.py`: registry of the four frozen source-model families used for validity features.
-- `plan_utils.py`: PDDL parsing, pyperplan grounding, gold-plan recovery, symbolic rollout, plan corruption, JSONL IO, and VAL labeling.
-- `features.py`: frozen transition-model loading and 55-dimensional feature extraction.
-- `build_validity_dataset.py`: candidate construction and feature-matrix generation.
-- `train_validity.py`: MLP validity-head training and per-split prediction output.
-- `evaluate_validity_story.py`: threshold tuning, baseline evaluation, and summary-table generation.
-- `run_validity_experiments.py`: workflow runner that rebuilds features from included candidates and retrains all MLP heads.
+### Infrastructure (shared, do not modify)
 
-## Implementation Summary
+| File | Purpose |
+|---|---|
+| `config.py` | Central paths, domains, splits, seeds. Also defines `RETRAINED_HEAD_DIR` and `CORRECTNESS_HEAD_DIR`. |
+| `families.py` | Registry of the four frozen source-model families used as feature extractors. |
+| `plan_utils.py` | PDDL parsing, symbolic rollout, plan corruption, `compute_correctness_score`. |
+| `features.py` | Loads frozen transition models and extracts the 55-dimensional feature vector per plan. |
+| `build_correctness_dataset.py` | Builds the feature matrices (`.npz` files) stored in `data/correctness_dataset/`. |
 
-I treat plan validity as a supervised binary classification problem. The label comes from symbolic plan validation. The input to the classifier is not a raw action sequence. Instead, I use frozen source transition models to score how plausible each symbolic transition looks in the learned state representation.
+### Regression pipeline
 
-The feature extractor rolls out each candidate plan with grounded PDDL operators. Unknown or inapplicable actions become stalled no-op transitions in the feature sequence, which keeps the feature extraction interface fixed-size without giving the classifier an explicit symbolic failure flag.
+| File | Purpose |
+|---|---|
+| `baselines.py` | `MeanPredictor` and `PlanLengthRegressor` — dumb baselines to compare against. |
+| `train_single_correctness_head.py` | **Main script for Experiments.** Trains one MLP experiment across all seeds. Reads a YAML config. |
+| `train_all_correctness_heads.py` | **Main script for full Pipeline.** Orchestrator for the full run across all 4 families × 3 seeds, reads best_params.json to set best hyperparameters for each family. |
+| `evaluate_correctness_story.py` | Aggregates predictions, runs baselines, writes summary tables. |
+
+### Config files
+
+| Location | Purpose |
+|---|---|
+| `config/baseline.yaml` | Template config — copy and modify for each new experiment. |
+| `config/*.yaml` | One file per experiment you want to run. |
+
+---
+
+## How experiments work
+
+### Running a single experiment (recommended for testing ideas)
+
+1. Copy `config/baseline.yaml` and give it a descriptive name:
+   ```
+   config/exp_001_my_experiment.yaml
+   ```
+
+2. Edit only the fields you want to change:
+   ```yaml
+   experiment: exp_001_my_experiment
+   description: "Your experiment"
+   family: "dd_lstm_shortest_path_delta"
+   ```
+
+3. Run it:
+   ```bash
+   python -m code.downstream.train_correctness code/downstream/config/exp_001_my_experiment.yaml
+   ```
+
+4. Results are saved to:
+   ```
+   outputs/retrained_correctness_heads/
+     dd_lstm_shortest_path_delta/
+       exp_001_my_experiment/
+         config.yaml          ← copy of the YAML used
+         mean_metrics.json    ← mean ± std across the 3 seeds
+         seed_13/             ← correctness_mlp.pt, metrics.json, history.csv, *.png
+         seed_23/
+         seed_37/
+   ```
+
+5. Compare `mean_metrics.json` with the baseline.
+
+---
+
+### Running the full pipeline (all 4 families × 3 seeds)
+
+This uses the best hyperparameters found for each family:
+
+```bash
+# Experiment run (results go to results/experiments/retrained_correctness_heads/)
+python -m code.downstream.run_correctness_experiments
+
+# Final run (results go to models/correctness_heads/)
+python -m code.downstream.run_correctness_experiments --final
+```
+
+The orchestrator reads `best_params.json` from the model comparison results and calls
+`train_correctness.py` for each family × seed automatically.
+
+---
+
+## Output directories
+
+| Directory | When to use |
+|---|---|---|
+| `results/experiments/retrained_correctness_heads/` | All experiment runs |
+| `models/correctness_heads/` | Final heads — when experiments are complete |
+
+---
+
+## Correctness score definition
+
+The regression target is computed by `compute_correctness_score` in `plan_utils.py`:
+
+```
+correctness_score = α × execution_ratio + (1 − α) × goal_satisfaction
+```
+
+where `execution_ratio` is the fraction of the plan that remains applicable before the
+first failure, and `goal_satisfaction` is the fraction of goal conditions met at the end. The score is in [0, 1].
+
+---
+
+## Feature vectors
+
+Each candidate plan is represented by a **55-dimensional** feature vector extracted by rolling out
+the plan through a frozen transition model. The features capture residuals, cosine
+distances, norm statistics, and goal distances at each step. Unknown or inapplicable actions become stalled no-op transitions in the feature sequence, which keeps the feature extraction interface fixed-size without giving the regressor an explicit symbolic failure flag. They are produced by
+`features.py` and stored in `data/correctness_dataset/features/`.

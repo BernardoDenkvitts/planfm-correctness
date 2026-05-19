@@ -1,0 +1,17 @@
+activation: GELU
+batch_size: 64
+dataset_dir: /home/bernardod/desktop/research/planfm-validity/data/correctness_dataset
+description: "Main run \u2014 dd_xgb_wl_delta seed 37"
+device: cuda
+dropout: 0.3
+epochs: 150
+experiment: exp_final
+family: dd_xgb_wl_delta
+hidden_dims:
+- 128
+- 64
+lr: 0.001
+output_dir: /home/bernardod/desktop/research/planfm-validity/models/correctness_heads
+patience: 20
+seed: 37
+weight_decay: 0.0001

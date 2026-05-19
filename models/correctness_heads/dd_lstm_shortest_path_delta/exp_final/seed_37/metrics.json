@@ -1,0 +1,38 @@
+{
+  "train": {
+    "num_examples": 1156,
+    "MAE": 0.06859737634658813,
+    "RMSE": 0.11215244838115412,
+    "R2": 0.8722049593925476,
+    "split": "train",
+    "group": "overall",
+    "group_value": "overall"
+  },
+  "validation": {
+    "num_examples": 165,
+    "MAE": 0.07278084009885788,
+    "RMSE": 0.12448528607608328,
+    "R2": 0.826234757900238,
+    "split": "validation",
+    "group": "overall",
+    "group_value": "overall"
+  },
+  "test-interpolation": {
+    "num_examples": 260,
+    "MAE": 0.11247678101062775,
+    "RMSE": 0.1792699170260052,
+    "R2": 0.6859346628189087,
+    "split": "test-interpolation",
+    "group": "overall",
+    "group_value": "overall"
+  },
+  "test-extrapolation": {
+    "num_examples": 1365,
+    "MAE": 0.17321492731571198,
+    "RMSE": 0.23315358586227894,
+    "R2": 0.3901023864746094,
+    "split": "test-extrapolation",
+    "group": "overall",
+    "group_value": "overall"
+  }
+}

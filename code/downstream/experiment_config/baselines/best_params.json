@@ -1,0 +1,39 @@
+{
+    "ad_lstm_wl_delta": {
+        "hidden_dims": [
+            128,
+            64,
+            32
+        ],
+        "lr": 0.001,
+        "dropout": 0.2,
+        "weight_decay": 0.0001
+    },
+    "ad_xgb_wl_delta": {
+        "hidden_dims": [
+            64,
+            32
+        ],
+        "lr": 0.001,
+        "dropout": 0.3,
+        "weight_decay": 0.0001
+    },
+    "dd_lstm_shortest_path_delta": {
+        "hidden_dims": [
+            128,
+            64
+        ],
+        "lr": 0.001,
+        "dropout": 0.3,
+        "weight_decay": 0.0001
+    },
+    "dd_xgb_wl_delta": {
+        "hidden_dims": [
+            128,
+            64
+        ],
+        "lr": 0.001,
+        "dropout": 0.3,
+        "weight_decay": 0.0001
+    }
+}

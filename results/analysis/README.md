@@ -4,9 +4,12 @@ This folder contains aggregate CSV summaries.
 
 ## Files
 
-- `tuned_threshold_metrics.csv`: per-run MLP metrics after tuning a threshold on validation predictions.
-- `tuned_threshold_summary.csv`: mean and standard deviation of tuned-threshold MLP metrics.
-- `baseline_metrics.csv`: per-run majority, plan-length logistic regression, and corruption-type diagnostic metrics.
-- `baseline_summary.csv`: mean and standard deviation of baseline metrics.
+- `correctness_metrics.csv`: per-run regression metrics (MAE, RMSE, R²) for the neural MLP models.
+- `correctness_summary.csv`: mean and standard deviation of MLP correctness metrics.
+- `baseline_metrics.csv`: per-run regression metrics for the dumb baselines.
+- `baseline_summary.csv`: mean and standard deviation of the dumb baselines metrics.
 - `story_metrics.csv`: combined MLP and baseline rows.
 - `story_summary.csv`: combined aggregate summary.
+
+
+Intentionally no visualization was generated, but can be if necessary
