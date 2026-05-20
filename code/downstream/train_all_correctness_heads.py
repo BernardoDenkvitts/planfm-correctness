@@ -63,7 +63,7 @@ def main() -> None:
         action="store_true",
         help=(
             "Save heads to models/correctness_heads/ (tracked by git) instead of "
-            "outputs/regression_correctness_heads/ (gitignored). "
+            "results/experiments/retrained_correctness_heads/ (gitignored). "
             "Use only when experiments are complete and results are final."
         ),
     )
@@ -123,7 +123,7 @@ def main() -> None:
                 yaml.dump(cfg, tmp, default_flow_style=False)
                 tmp_path = tmp.name
 
-            cmd = [sys.executable, "-m", "code.downstream.train_correctness", tmp_path]
+            cmd = [sys.executable, "-m", "code.downstream.train_single_correctness_head", tmp_path]
             run_command(cmd, repo_root)
 
         # Aggregate metrics across seeds

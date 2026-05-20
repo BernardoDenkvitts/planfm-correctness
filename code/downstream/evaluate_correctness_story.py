@@ -56,7 +56,7 @@ def read_predictions(path: Path) -> dict[str, dict[str, list]]:
 
 def analyze_mlp_results(args) -> list[dict]:
     rows: list[dict] = []
-    mlp_root = Path(args.results_dir) if args.results_dir else REGRESSION_HEAD_DIR
+    mlp_root = Path(args.results_dir) if args.results_dir else CORRECTNESS_HEAD_DIR
     for family in args.families:
         for seed in args.seeds:
             if getattr(args, "experiment", None):
@@ -99,7 +99,7 @@ def load_family_data(family: str, feature_dir: Path, seed: int) -> dict:
         if not path.exists():
             continue
         npz = load_feature_matrix(path)
-        y_val = npz.get("correctness_scores", npz.get("y"))
+        y_val = npz.get("correctness_scores")
         data[split] = {
             "X": np.asarray(npz["X"], dtype=np.float32),
             "y": np.asarray(y_val, dtype=np.float32),

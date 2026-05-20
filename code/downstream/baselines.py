@@ -123,7 +123,8 @@ class PlanLengthRegressor:
             raise RuntimeError("Call fit() before predict().")
         X_len = X[:, self._col_indices]
         X_scaled = self._scaler.transform(X_len)
-        return self._model.predict(X_scaled).astype(np.float32)
+        preds = self._model.predict(X_scaled).astype(np.float32)
+        return np.clip(preds, 0.0, 1.0)
 
 
 # ---------------------------------------------------------------------------

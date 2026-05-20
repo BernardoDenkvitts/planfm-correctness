@@ -54,12 +54,12 @@ to 1 (fully correct), using features extracted from frozen transition models.
 
 3. Run it:
    ```bash
-   python -m code.downstream.train_correctness code/downstream/config/exp_001_my_experiment.yaml
+   python -m code.downstream.train_single_correctness_head code/downstream/experiment_config/exp_001_my_experiment.yaml
    ```
 
 4. Results are saved to:
    ```
-   outputs/retrained_correctness_heads/
+   results/experiments/retrained_correctness_heads/
      dd_lstm_shortest_path_delta/
        exp_001_my_experiment/
          config.yaml          ← copy of the YAML used
@@ -75,27 +75,28 @@ to 1 (fully correct), using features extracted from frozen transition models.
 
 ### Running the full pipeline (all 4 families × 3 seeds)
 
-This uses the best hyperparameters found for each family:
+This uses the best hyperparameters found for each family, stored in
+`experiment_config/baselines/best_params.json`:
 
 ```bash
 # Experiment run (results go to results/experiments/retrained_correctness_heads/)
-python -m code.downstream.run_correctness_experiments
+python -m code.downstream.train_all_correctness_heads --experiment <experiment_name>
 
 # Final run (results go to models/correctness_heads/)
-python -m code.downstream.run_correctness_experiments --final
+python -m code.downstream.train_all_correctness_heads --final --experiment <experiment_name>
 ```
 
-The orchestrator reads `best_params.json` from the model comparison results and calls
-`train_correctness.py` for each family × seed automatically.
+The orchestrator reads `best_params.json` from `experiment_config/baselines/` and calls
+`train_single_correctness_head.py` for each family × seed automatically.
 
 ---
 
 ## Output directories
 
 | Directory | When to use |
-|---|---|---|
+|---|---|
 | `results/experiments/retrained_correctness_heads/` | All experiment runs |
-| `models/correctness_heads/` | Final heads — when experiments are complete |
+| `models/correctness_heads/` | Final heads — when experiments are complete (use `--final` flag) |
 
 ---
 

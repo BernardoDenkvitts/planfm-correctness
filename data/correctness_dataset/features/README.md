@@ -8,4 +8,4 @@ The path pattern is:
 <source_family>/seed_<seed>/<split>.npz
 ```
 
-Each matrix contains the 55-dimensional frozen transition-model feature vectors consumed by `code/downstream/train_correctness.py`.
+Each matrix contains the 55-dimensional frozen transition-model feature vectors consumed by `code/downstream/train_single_correctness_head.py` or `notebooks/exploration/*.ipynb`.

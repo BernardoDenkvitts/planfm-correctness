@@ -1,6 +1,6 @@
 # Source Transition Models
 
-This folder contains the frozen source models used to compute downstream validity features.
+This folder contains the frozen source models used to compute downstream correctness features.
 
 ## Included Source Families
 

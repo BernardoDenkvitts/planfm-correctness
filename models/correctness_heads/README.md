@@ -8,6 +8,6 @@ Each leaf directory has:
 - `history.csv`: training and validation loss per epoch.
 - `metrics.csv`: split-level, domain-level, and corruption-level metrics.
 - `metrics.json`: split-level metric dictionary.
-- `predictions.csv`: probability and binary prediction for each candidate plan.
+- `predictions.csv`: predicted correctness score and true correctness score for each candidate plan.
 
 I train one head per source family and seed.

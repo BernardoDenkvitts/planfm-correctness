@@ -1,4 +1,4 @@
-"""Recompute frozen transition-model features from the included candidate plans."""
+"""Evaluate the included trained correctness heads and write summary CSV files."""
 
 from __future__ import annotations
 
@@ -14,9 +14,7 @@ def main() -> None:
     cmd = [
         sys.executable,
         "-m",
-        "code.downstream.build_correctness_dataset",
-        "--skip_candidates",
-        "--overwrite_features",
+        "code.downstream.evaluate_correctness_story",
     ]
     cmd.extend(sys.argv[1:])
     subprocess.run(cmd, cwd=PROJECT_ROOT, check=True)
