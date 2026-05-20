@@ -27,7 +27,7 @@ scripts/                        command-line entry points for the main workflows
 
 ## Downstream Task
 
-The downstream task is a regression over complete candidate plans. A plan is positive if its grounded action sequence is executable and reaches the PDDL goal. A plan is negative if the sequence fails execution or finishes in a state that does not satisfy the goal.
+The downstream task is a regression over complete candidate plans. Each plan is assigned a continuous `correctness_score` in [0, 1]: a score of 1.0 means the plan is fully valid (the grounded action sequence is executable and reaches the PDDL goal), while 0.0 means the plan completely fails. Partial scores reflect how far the plan executed before the first failure and how many goal conditions were satisfied at the end.
 
 Each problem contributes one positive candidate from the recovered gold plan. Negative candidates are generated with plan corruptions: truncation, deletion, adjacent swap, action replacement, action insertion, and short segment repetition. The checked-in candidate set was labeled with VAL.
 
