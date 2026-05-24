@@ -10,3 +10,7 @@ This folder contains aggregate CSV summaries.
 - `baseline_summary.csv`: mean and standard deviation of the dumb baselines metrics.
 - `story_metrics.csv`: combined MLP and baseline rows.
 - `story_summary.csv`: combined aggregate summary.
+
+## Folders
+
+- `notebooks/`: Jupyter notebooks for analysis and plotting.
