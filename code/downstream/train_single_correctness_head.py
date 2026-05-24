@@ -122,16 +122,11 @@ def load_split(dataset_dir: str | Path, family: str, seed: int, split: str) -> d
         raise FileNotFoundError(f"Missing feature split: {path}")
     
     npz = load_feature_matrix(path)
-    
-    # Handle the fact that 'correctness_scores' might be named 'y' due to different dataset versions
-    if "correctness_scores" in npz:
-        y_val = npz["correctness_scores"]
-    elif "y" in npz:
-        y_val = npz["y"]
-    else:
-        raise KeyError("Neither 'correctness_scores' nor 'y' found in npz file")
-        
-    npz["correctness_scores"] = y_val
+
+    # The column `correctness_scores` is our ground-truth correctness score
+    if "correctness_scores" not in npz:
+        raise KeyError(f"'correctness_scores' not found in npz file: {path}")
+
     return npz
 
 
@@ -141,53 +136,6 @@ def make_loader(X: np.ndarray, y: np.ndarray, batch_size: int, shuffle: bool) ->
         torch.tensor(y, dtype=torch.float32),
     )
     return DataLoader(ds, batch_size=batch_size, shuffle=shuffle)
-
-
-# def add_ratio_features(data: dict, features_added: list[str]) -> None:
-#     if not features_added:
-#         return
-
-#     X = data["X"]
-#     feature_names = [str(name) for name in data["feature_names"]]
-
-#     def get_col(name: str) -> np.ndarray:
-#         if name not in feature_names:
-#             raise ValueError(f"Feature {name} not found in dataset for computing ratios.")
-#         return X[:, feature_names.index(name)]
-
-#     epsilon = 1e-8  # to prevent division by zero
-
-#     new_features = []
-#     new_names = []
-
-#     if "final_goal_ratio" in features_added:
-#         new_features.append(get_col("final_goal_l2") / (get_col("initial_goal_l2") + epsilon))
-#         new_names.append("final_goal_ratio")
-
-#     if "goal_reduction_ratio" in features_added:
-#         col = (get_col("initial_goal_l2") - get_col("final_goal_l2")) / (get_col("initial_goal_l2") + epsilon)
-#         new_features.append(col)
-#         new_names.append("goal_reduction_ratio")
-
-#     if "pred_to_current_goal_final_ratio" in features_added:
-#         new_features.append(get_col("pred_goal_l2_final") / (get_col("current_goal_l2_final") + epsilon))
-#         new_names.append("pred_to_current_goal_final_ratio")
-
-#     if "pred_to_current_goal_mean_ratio" in features_added:
-#         new_features.append(get_col("pred_goal_l2_mean") / (get_col("current_goal_l2_mean") + epsilon))
-#         new_names.append("pred_to_current_goal_mean_ratio")
-
-#     if "current_goal_final_over_max" in features_added:
-#         new_features.append(get_col("current_goal_l2_final") / (get_col("current_goal_l2_max") + epsilon))
-#         new_names.append("current_goal_final_over_max")
-
-#     if "pred_goal_final_over_max" in features_added:
-#         new_features.append(get_col("pred_goal_l2_final") / (get_col("pred_goal_l2_max") + epsilon))
-#         new_names.append("pred_goal_final_over_max")
-
-#     if new_features:
-#         data["X"] = np.column_stack([X] + new_features)
-#         data["feature_names"] = np.array(feature_names + new_names)
 
 
 def train(args) -> dict:
@@ -203,10 +151,8 @@ def train(args) -> dict:
 
     features_added = getattr(args, "features_added", [])
     if features_added:
-        add_ratio_features(train_data, features_added)
-        add_ratio_features(val_data, features_added)
-        for split_data in eval_data.values():
-            add_ratio_features(split_data, features_added)
+        # Add the code to add your features here.
+        raise NotImplementedError("Implement the function to add your features to the dataset.")
 
     feature_names = [str(name) for name in train_data["feature_names"]]
     keep_mask = build_feature_keep_mask(

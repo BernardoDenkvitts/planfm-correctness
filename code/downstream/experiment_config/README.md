@@ -1,5 +1,3 @@
-# Baseline Hyperparameters
-
 This folder contains the best MLP hyperparameters for each source family,
 chosen from the grid search in `notebooks/exploration/01_model_comparison.ipynb`.
 

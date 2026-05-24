@@ -1,3 +1,5 @@
+### Consider experiment 1 as the baseline config of each family (exp_001_baseline_{family})
+
 ### Experiment 2 - No raw plan size features
 Evaluated whether removing the raw plan size features improves model performance across families.
 
@@ -26,20 +28,20 @@ Evaluated whether using SILU or GELU as activation functions instead of ReLU imp
 * For GELU:
     * For ad_lstm_wl_delta validation and interpolation metrics kept the same, test extrapolation metrics improved ~0.02 for MAE and RMSE, and ~0.12 for R².
 
-    * For ad_xgb_wl_deta metrics kept the same for val, inter and extrapolation, minor changes ~0.01.
+    * For ad_xgb_wl_delta metrics kept the same for val, inter and extrapolation, minor changes ~0.01.
 
-    * For dd_lstm_shortest_path_delta metrics kept the same for kept the same for val, inter and extrapolation, extrapolation R² increased ~0.02 
+    * For dd_lstm_shortest_path_delta metrics kept the same for val, inter and extrapolation, extrapolation R² increased ~0.02 
     
-    * For dd_xgb_wl_deta metrics kept the same for val, inter and extrapolation.
+    * For dd_xgb_wl_delta metrics kept the same for val, inter and extrapolation.
 
 * For SILU:
     * For ad_lstm_wl_delta validation and interpolation metrics kept the same, test extrapolation metrics improved ~0.02 for MAE and RMSE, and ~0.12 for R².
 
-    * For ad_xgb_wl_deta metrics kept the same for val, inter and extrapolation, interpolation r² increased ~0.05.
+    * For ad_xgb_wl_delta metrics kept the same for val, inter and extrapolation, interpolation r² increased ~0.05.
 
     * For dd_lstm_shortest_path_delta metrics for val and interpolation kept the same, extrapolation all decreased, especially R² (0.36 to 0.32).
     
-    * For dd_xgb_wl_deta kept the same slighly changes ~0.01.
+    * For dd_xgb_wl_delta kept the same slighly changes ~0.01.
 
 ### Experiment 5 - Removed High Correlated Features
 

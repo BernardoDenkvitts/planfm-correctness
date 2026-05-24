@@ -1,0 +1,23 @@
+description: "Experiment using the chosen settings for the MLP"
+experiment: final_experiment
+
+family: dd_xgb_wl_delta
+seeds: [13, 23, 37]
+
+hidden_dims: [128, 64]
+dropout: 0.3
+activation: GELU
+
+lr: 0.001
+weight_decay: 0.0001
+batch_size: 64
+epochs: 150
+patience: 20
+
+features_to_drop: []
+
+features_added: [] 
+
+device: cuda
+verbose: false
+

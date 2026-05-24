@@ -63,10 +63,10 @@ Only WL and shortest-path tokenization code is included because those are the on
 The correctness head is implemented in `code/downstream/train_single_correctness_head.py`. The MLP architecture varies per source family:
 
 - input: 55 standardized transition-consistency features
-- hidden layers: see `code/downstream/experiment_config/baselines/best_params.json`
+- hidden layers: see `code/downstream/experiment_config/best_params.json`
 - normalization: `LayerNorm` after each hidden linear layer
 - activation: GELU
-- dropout: see `code/downstream/experiment_config/baselines/best_params.json`
+- dropout: see `code/downstream/experiment_config/best_params.json`
 - loss: `MSELoss`
 - optimizer: AdamW
 - scheduler: `ReduceLROnPlateau`
@@ -126,7 +126,7 @@ Step 0 — Hyperparameter search (only when tuning is needed)
   notebooks/exploration/01_model_comparison.ipynb
     → results/model_comparison/<family>/seed_<seed>/best_params.json  (per-seed)
     → commit the chosen params to:
-       code/downstream/experiment_config/baselines/best_params.json
+       code/downstream/experiment_config/best_params.json
 
 Step 1 — Compare the three tested regressor models, pick the best one
   notebooks/exploration/02_analysis_model_comparison.ipynb
@@ -185,7 +185,7 @@ python -m code.downstream.evaluate_correctness_story --seeds 13
 
 ### 2. Retrain Correctness Heads From Checked-In Feature Matrices
 
-This command skips feature construction and trains new MLP regression heads from `data/correctness_dataset/features` using a YAML-driven orchestration. It reads the best hyperparameters from `code/downstream/experiment_config/baselines/best_params.json` and runs `train_single_correctness_head.py` for each family × seed. The new checkpoints, metrics, predictions, and aggregated metrics are written under `results/experiments/retrained_correctness_heads/`.
+This command skips feature construction and trains new MLP regression heads from `data/correctness_dataset/features` using a YAML-driven orchestration. It reads the best hyperparameters from `code/downstream/experiment_config/best_params.json` and runs `train_single_correctness_head.py` for each family × seed. The new checkpoints, metrics, predictions, and aggregated metrics are written under `results/experiments/retrained_correctness_heads/`.
 
 ```bash
 python -m code.downstream.train_all_correctness_heads

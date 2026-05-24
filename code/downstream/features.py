@@ -432,10 +432,8 @@ def save_feature_matrix(
     np.savez_compressed(
         path,
         X=features.astype(np.float32),
-        # Old code y label agora é o correctness_score, lembrar de mudar no codigo
-        #y=np.asarray([int(row["label_valid"]) for row in candidates], dtype=np.int64),
-        #correctness_scores=np.asarray([float(row["correctness_score"]) for row in candidates], dtype=np.float32),
-        y=np.asarray([int(row["correctness_score"]) for row in candidates], dtype=np.int64),
+        # The column `correctness_scores` is our ground-truth correctness score.
+        correctness_scores=np.asarray([float(row["correctness_score"]) for row in candidates], dtype=np.float32),
         label_valid=np.asarray([int(row["label_valid"]) for row in candidates], dtype=np.int64),
         candidate_ids=np.asarray([row["candidate_id"] for row in candidates], dtype=object),
         domains=np.asarray([row["domain"] for row in candidates], dtype=object),

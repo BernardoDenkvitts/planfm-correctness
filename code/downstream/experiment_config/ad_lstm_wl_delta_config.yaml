@@ -1,8 +1,8 @@
 # MLP configuration - passed to train_correctness.py
 
 # --- Experiment metadata ---
-description: "GELU activation + Removed features related to raw plan size"
-experiment: exp_006_gelu_with_no_raw_plan_size_features   # used as the folder name under the family directory
+description: "Experiment using the chosen settings for the MLP"
+experiment: final_experiment   # used as the folder name under the family directory
 
 family: ad_lstm_wl_delta
 seeds: [13, 23, 37]      # runs all seeds
@@ -20,7 +20,7 @@ epochs: 150
 patience: 20
 
 # --- Feature selection (leave empty to use all 55 features) ---
-features_to_drop: ["plan_len", "log_plan_len", "plan_to_budget_ratio"]     # drop features whose name contains these substrings
+features_to_drop: []     # drop features whose name contains these substrings
 features_to_keep: []     # if non-empty, use ONLY these exact feature names
 
 # --- Runtime ---

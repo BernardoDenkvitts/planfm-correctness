@@ -46,7 +46,7 @@ def main() -> None:
     )
     parser.add_argument(
         "--best_params_path", 
-        default=str(PROJECT_ROOT / "code" / "downstream" / "experiment_config" / "baselines" / "best_params.json")
+        default=str(PROJECT_ROOT / "code" / "downstream" / "experiment_config" / "best_params.json")
     )
     parser.add_argument("--dataset_dir", default=str(CORRECTNESS_DATASET_DIR))
     parser.add_argument("--output_dir", default=str(RETRAINED_HEAD_DIR))
